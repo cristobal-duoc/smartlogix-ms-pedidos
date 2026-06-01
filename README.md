@@ -76,11 +76,24 @@ POST /api/pedidos
 }
 ```
 
-## Tests
+## Pruebas y cobertura
+
+Pruebas unitarias con **JUnit 5 + Mockito**. Usan **H2 en memoria** (perfil de test).
 
 ```bash
-mvn test
+mvn test      # ejecuta las pruebas
+mvn verify    # pruebas + reporte de cobertura + validacion del minimo (>=60%)
 ```
 
-- `PedidoFactoryTest`: prueba el Factory Method (9 casos)
-- `PedidoServiceTest`: prueba la lógica del servicio con mocks (8 casos)
+- `PedidoFactoryTest`: prueba el Factory Method (9 casos).
+- `PedidoServiceTest`: lógica del servicio con mocks del repositorio (8 casos).
+- `PedidoControllerTest`: capa REST y códigos HTTP / 404 (8 casos).
+- `OpenApiExportTest`: genera la especificación Swagger en `api-docs/openapi.json`.
+
+Reporte de cobertura (JaCoCo): `target/site/jacoco/index.html`. La regla `jacoco:check`
+falla el build si la cobertura baja del 60%. Cobertura actual: **87.7%**.
+
+## API REST (Swagger)
+
+Con el servicio corriendo: UI en `/swagger-ui.html` y especificación JSON en
+`/v3/api-docs` (copia versionada en `api-docs/openapi.json`).
